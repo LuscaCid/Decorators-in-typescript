@@ -79,7 +79,7 @@ function medidorDeVelocidadeDoMetodo() {
         }
 }
 
-function decoratorThatsReceivesAnCallback( callback : () => string ) {
+function decoratorThatsReceivesAnCallback( callback : (args : string) => string ) {
     return function (
         target : object,
         propertyKey : string,
@@ -87,9 +87,10 @@ function decoratorThatsReceivesAnCallback( callback : () => string ) {
     ) {
         const originFunction = descriptor.value
         descriptor.value = function (args : string) {
-            console.log(callback())
-
+            console.log(callback(args))
+            return originFunction.apply(this, args)
         }
+        return descriptor
     }
 }
 
@@ -109,6 +110,21 @@ function testWithoutReturnAFunction(
         get : getter,
         set : setter
     })
+}
+
+function UseOfMap(){
+    return function (
+        target : object, 
+        propertyKey : string
+    ){  
+        type Keye = string | null
+    
+        const key : Keye = null
+        
+        let mapa = new Map()
+        
+        
+    }
 }
 
 class TestDecorators implements IimplementMethod{

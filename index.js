@@ -65,8 +65,10 @@ function decoratorThatsReceivesAnCallback(callback) {
     return function (target, propertyKey, descriptor) {
         const originFunction = descriptor.value;
         descriptor.value = function (args) {
-            console.log(callback());
+            console.log(callback(args));
+            return originFunction.apply(this, args);
         };
+        return descriptor;
     };
 }
 function testWithoutReturnAFunction(target, propertyKey) {
@@ -81,6 +83,12 @@ function testWithoutReturnAFunction(target, propertyKey) {
         get: getter,
         set: setter
     });
+}
+function UseOfMap() {
+    return function (target, propertyKey) {
+        const key = null;
+        let mapa = new Map();
+    };
 }
 class TestDecorators {
     nomeDoMetodo(args) {
