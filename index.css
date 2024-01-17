@@ -5,6 +5,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 2rem;
+
 }
 
 .box1,.box2{
@@ -19,4 +21,10 @@ body {
     height: 50rem;
     background: orange;
     z-index: -1;
+    transition: transform 0.3s;
+}
+
+.box1::before:hover{
+    width: 47rem;
+    height: 53rem;
 }
